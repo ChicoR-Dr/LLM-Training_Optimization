@@ -67,7 +67,7 @@ unsloth
 ### ➤ DeepSpeed Training
 
 ```bash
-cd deepspeed
+cd Deepspeed_training
 deepspeed train.py \
   --deepspeed config/deepspeed_config.json \
   --model_name_or_path TinyLlama/TinyLlama-1.1B-Chat-v1.0 \
@@ -85,9 +85,16 @@ deepspeed train.py \
 ### ➤ Unsloth Training
 
 ```bash
-cd unsloth
-python train.py
-```
+
+cd Unsloth_training
+python train.py \
+  --model_name_or_path TinyLlama/TinyLlama-1.1B-Chat-v1.0 \
+  --dataset_name tatsu-lab/alpaca \
+  --per_device_train_batch_size 4 \
+  --gradient_accumulation_steps 4 \
+  --bf16 \
+  --output_dir unsloth_outputs/
+
 
 > See [`unsloth/README.md`](./unsloth/README.md) for full instructions.
 
@@ -97,8 +104,8 @@ python train.py
 
 Each script saves the fine-tuned model in:
 
-- `./deepspeed/outputs/`
-- `./unsloth/unsloth_tinyllama-qlora/peft/`
+- `./Deepspeed_training/tinyllama-qlora/peft/`
+- `./Unsloth_training/unsloth_tinyllama-qlora/peft/`
 
 These can be pushed to 🤗 Hub or used for inference.
 
@@ -109,6 +116,13 @@ These can be pushed to 🤗 Hub or used for inference.
 - Both use **QLoRA** (4-bit quantization + LoRA).
 - Suitable for training on a **single GPU with ~16 GB VRAM**.
 - You can extend either script for more epochs, larger datasets, or custom prompts.
+
+---
+
+## 📘 Training Screenshots
+
+- DeepSpeed - `Deepspeed_training/Training_file_details.txt`
+- UnSloth - `Unsloth_training/Training_file_details_unsloth.txt`
 
 ---
 
