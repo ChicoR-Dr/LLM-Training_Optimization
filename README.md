@@ -1,55 +1,74 @@
-# LLM-Training_Optimization
+# 🚀 LLM Training Optimization Projects
 
+This repository demonstrates two efficient methods for fine-tuning Large Language Models (LLMs) using:
 
-.
-├── deepspeed/
-│   ├── train.py
-│   ├── config/
-│   │   └── deepspeed_config.json
-│   ├── outputs/
-│   └── README.md  <-- For DeepSpeed
-├── unsloth/
-│   ├── train.py
-│   ├── inference.py
-│   ├── outputs/
-│   └── README.md  <-- For Unsloth
-├── shared/
-│   └── utils.py
-└── .gitignore
+- ⚡️ **DeepSpeed** with Transformers and PEFT (QLoRA)
+- 🐍 **Unsloth**: An ultra-fast LoRA/QLoRA trainer
 
-
-
-# 🦙 TinyLlama QLoRA Fine-Tuning with DeepSpeed
-
-This directory demonstrates how to fine-tune [TinyLlama-1.1B-Chat-v1.0](https://huggingface.co/TinyLlama/TinyLlama-1.1B-Chat-v1.0) using QLoRA and DeepSpeed. It supports multi-GPU training and full model fine-tuning.
+Each method is encapsulated in its own directory with training scripts and configs.
 
 ---
 
-## 📦 Requirements
+## 📁 Project Structure
+
+```
+LLM-Training_Optimization/
+│
+├── deepspeed/               # Fine-tuning with DeepSpeed + QLoRA
+│   ├── train.py
+│   ├── config/
+│   │   └── deepspeed_config.json
+│   └── README.md
+│
+├── unsloth/                 # Fine-tuning with Unsloth + QLoRA
+│   ├── train.py
+│   └── README.md
+│
+└── README.md                # This file
+```
+
+---
+
+## ✅ Dataset
+
+Both projects use the [Alpaca dataset](https://huggingface.co/datasets/tatsu-lab/alpaca) for demonstration. You can change the dataset in `train.py`.
+
+---
+
+## 🧠 Base Model
+
+These examples use [TinyLlama-1.1B-Chat-v1.0](https://huggingface.co/TinyLlama/TinyLlama-1.1B-Chat-v1.0), a 1.1B parameter instruction-tuned model, suitable for low-resource fine-tuning.
+
+---
+
+## 🛠 Requirements
+
+Install the required libraries in a fresh environment:
 
 ```bash
-pip install transformers peft accelerate deepspeed datasets bitsandbytes
+pip install -r requirements.txt
+```
 
+Here's a minimal example `requirements.txt`:
 
-⚙️ Configuration
-Edit config/deepspeed_config.json to control:
+```text
+transformers
+datasets
+peft
+accelerate
+deepspeed
+unsloth
+```
 
-ZeRO stage
+---
 
-Offloading
+## 📦 How to Use
 
-Gradient checkpointing
+### ➤ DeepSpeed Training
 
-Memory optimizations
-
-Model details
-Tinylamma 1b already donwloaded on local system
-
-🚀 Launch Training
-
-1 python train.py
-
-2 deepspeed train.py \
+```bash
+cd deepspeed
+deepspeed train.py \
   --deepspeed config/deepspeed_config.json \
   --model_name_or_path TinyLlama/TinyLlama-1.1B-Chat-v1.0 \
   --dataset_name tatsu-lab/alpaca \
@@ -57,19 +76,49 @@ Tinylamma 1b already donwloaded on local system
   --gradient_accumulation_steps 4 \
   --bf16 True \
   --output_dir outputs/
-You can toggle between full fine-tuning and LoRA by modifying the trainer logic inside train.py.
+```
 
+> See [`deepspeed/README.md`](./deepspeed/README.md) for full instructions.
 
-🧠 Dataset Format
-Uses Alpaca-style instruction tuning format:
+---
 
-{
-  "instruction": "Describe photosynthesis.",
-  "input": "",
-  "output": "Photosynthesis is the process..."
-}
+### ➤ Unsloth Training
 
-📤 Outputs
-Folder	Description
-outputs/	Hugging Face checkpoints (PEFT adapters)
-merged_model/	Optional merged full model post-training
+```bash
+cd unsloth
+python train.py
+```
+
+> See [`unsloth/README.md`](./unsloth/README.md) for full instructions.
+
+---
+
+## 📤 Output
+
+Each script saves the fine-tuned model in:
+
+- `./deepspeed/outputs/`
+- `./unsloth/unsloth_tinyllama-qlora/peft/`
+
+These can be pushed to 🤗 Hub or used for inference.
+
+---
+
+## 📘 Notes
+
+- Both use **QLoRA** (4-bit quantization + LoRA).
+- Suitable for training on a **single GPU with ~16 GB VRAM**.
+- You can extend either script for more epochs, larger datasets, or custom prompts.
+
+---
+
+## 👨‍💻 Author
+
+Chinmay @ Cognisyn Labs  
+🔬 https://cognisynlabs.com/
+
+---
+
+## 🧪 License
+
+MIT License
