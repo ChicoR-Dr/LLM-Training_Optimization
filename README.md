@@ -129,9 +129,8 @@ These can be pushed to 🤗 Hub or used for inference.
 ## 👨‍💻 Author
 
 Chinmay @ Cognisyn Labs  
-🔬 https://cognisynlabs.com/
-
-chinmayatcognisynlabs@gmail.com
+- 🔬 https://cognisynlabs.com/
+- chinmayatcognisynlabs@gmail.com
 ---
 
 ## 🧪 License
