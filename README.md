@@ -131,6 +131,7 @@ These can be pushed to 🤗 Hub or used for inference.
 Chinmay @ Cognisyn Labs  
 🔬 https://cognisynlabs.com/
 
+chinmayatcognisynlabs@gmail.com
 ---
 
 ## 🧪 License
