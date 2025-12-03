@@ -1,0 +1,16 @@
+{
+  "model_name": "microsoft/Phi-3-mini-4k-instruct",
+  "data_path": "DataSet/training_qna_sleep.json",
+  "save_path": "training_weights",
+  "max_seq_length": 2048,
+  "lora_r": 64,
+  "lora_alpha": 16,
+  "lora_dropout": 0.05,
+  "epochs": 3,
+  "batch_size": 2,
+  "eval_batch_size": 2,
+  "grad_accum_steps": 4,
+  "warmup_steps": 10,
+  "lr": 2e-4,
+  "prompt": "You are a xyz expert. Answer questions about xyz accurately and helpfully."
+}
